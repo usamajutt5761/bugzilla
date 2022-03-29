@@ -1,0 +1,10 @@
+<% @users.each do |user| %>
+  email: <%= user.email %><br>
+  role: <%= user.role %><br><br><br>
+<%end%>
+<% if current_user%>
+<%= link_to "Sign Out", destroy_user_session_path, method: :get %><br>
+<%= link_to "Edit Profile", edit_user_registration_path, method: :get %><br><br>
+
+<% end %>
+
