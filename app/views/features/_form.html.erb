@@ -1,0 +1,35 @@
+<h1><%= @project_name %></h1>
+<%= form_for([@feature.project, @feature]) do |f| %>
+  <% if @feature.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@feature.errors.count, "error") %> prohibited this feature from being saved:</h2>
+
+      <ul>
+      <% @feature.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :feature_name %><br />
+    <%= f.text_field :feature_name %>
+  </div>
+  
+  <% if current_user.role == 'qa' || current_user.role == 'developer' || current_user.role == 'project_manager' %>
+      <div class="field">
+    <%= f.label :status %><br />
+    <%= f.select :status, status %>
+  </div>
+  <% end %>
+  
+
+  <div class="field">
+    <%= f.label :project %><br />
+    <%= f.text_field :project, value:@project.name,:disabled=>true %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

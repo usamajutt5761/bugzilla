@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  bug_name: MyString
+  detail: MyText
+  status: 1
+  project: one
+
+two:
+  bug_name: MyString
+  detail: MyText
+  status: 1
+  project: two

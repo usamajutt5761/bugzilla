@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Bug name:</b>
+  <%= @bug.bug_name %>
+</p>
+
+<p>
+  <b>Detail:</b>
+  <%= @bug.detail %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @bug.status %>
+</p>
+
+<p>
+  <b>Project:</b>
+  <%= @project.name %>
+</p>
+
+
+<%= link_to 'Edit', edit_project_bug_path(@bug.project, @bug) %> |
+<%= link_to 'Back', project_bugs_path(@bug.project) %>

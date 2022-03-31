@@ -1,0 +1,44 @@
+
+<%= form_for([@bug.project, @bug]) do |f| %>
+  <% if @bug.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@bug.errors.count, "error") %> prohibited this bug from being saved:</h2>
+
+      <ul>
+      <% @bug.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :bug_name %><br />
+    <%= f.text_field :bug_name %>
+  </div>
+  <div class="field">
+    <%= f.label :detail %><br />
+    <%= f.text_area :detail %>
+  </div>
+
+  <% if current_user.role == 'qa' || current_user.role == 'developer' || current_user.role == 'project_manager' %>
+  <div class="field">
+    <%= f.label :status %><br />
+    <%= f.select :status, status %>
+  </div>
+ <% end %>
+ 
+    <div class="field">
+    <%= f.label :assigned_to %><br />
+    <%= collection_select(:bug, :user_id, users, :id, :email, {}, { :multiple => false}) %>
+  </div>
+
+
+  <div class="field">
+    <%= f.label :project %><br />
+    <%= f.text_field :project, value:@project.title, :disabled=>true %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

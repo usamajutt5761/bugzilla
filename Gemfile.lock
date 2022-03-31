@@ -312,6 +312,7 @@ DEPENDENCIES
   pundit
   rails (~> 7.0.2, >= 7.0.2.3)
   sass-rails
+  sassc-rails
   selenium-webdriver
   sprockets-rails
   sqlite3 (~> 1.4)

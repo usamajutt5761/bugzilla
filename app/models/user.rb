@@ -1,5 +1,6 @@
 class User < ApplicationRecord
 
+  has_many :bugs, dependent: :nullify
   has_many :user_to_projects, dependent: :destroy
   has_many :projects, through: :user_to_projects
   enum role: [:project_manager, :developer, :qa]
