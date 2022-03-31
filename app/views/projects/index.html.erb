@@ -5,9 +5,15 @@
 <div id="projects">
   <% @projects.each do |project| %>
     <%= render project %>
-    <p>
+    <a href="<%= project_path(project) %>">
+
+    <%
+=begin%>
+ <p>
       <%= link_to "Show this project", project %>
-    </p>
+    </p> 
+<%
+=end%>
   <% end %>
 </div>
 

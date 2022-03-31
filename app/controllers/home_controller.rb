@@ -1,6 +1,6 @@
 class  HomeController < ApplicationController
 
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
   ## if you want spesific action for require authentication
   ## before_filter :authenticate_user!, :only => [:action1, :action2]
  
@@ -11,7 +11,7 @@ class  HomeController < ApplicationController
 
     if not user_signed_in?
       
-        redirect_to user_session_path, :notice => 'login to continue'
+        redirect_to user_session_path, notice: 'login to continue'
     end
   end  
 

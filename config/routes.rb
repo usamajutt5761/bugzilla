@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  resources :projects
+  resources :projects do
+    resources :bugs
+    resources :features
+  end
   devise_for :users
   devise_for :admin_users, ActiveAdmin::Devise.config
   resources :users

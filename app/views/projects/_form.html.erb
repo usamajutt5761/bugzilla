@@ -16,12 +16,44 @@
     <%= form.text_field :title %>
   </div>
 
-  <div>
-    <%= form.label :project_manager_id, style: "display: block" %>
-    <%= form.number_field :project_manager_id %>
+  <%
+=begin%>
+ <div>
+    <%= form.label :users_, style: "display: block" %>
+    <% users.each do |user| %>
+      
+      <%= check_box_tag "users[]", user.id %> <%= user.email %> </br>
+    <% end %>
   </div>
+
+
+
 
   <div>
     <%= form.submit %>
-  </div>
+  </div> 
+<%
+=end%>
+
+
+  <% if added_users %>
+      <label for="users[]">Users:</label>
+      <% for user in users do %>
+        <br>
+        <%= check_box_tag 'users[]', user.id,
+          added_users.ids.include?(user.id) %>
+        <%= user.email %>
+      <% end %>
+    <% else %>
+      <div>
+        <%= form.label :users, style: "display: block" %>
+        <% users.each do |user| %>
+          <%= check_box_tag "users[]", user.id %> <%= user.email %> </br>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+<div>
+  <%= form.submit %>
+</div>
 <% end %>
