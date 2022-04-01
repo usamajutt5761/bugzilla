@@ -2,11 +2,20 @@
 
 <%= render @project %>
 
-
+<h1>developers of the project</h1><br>
+ <% @users.each do |user| %>
+   
+   user id: <%= user.id%><br>
+   user email :<%= user.email%><br>
+   user role:<%= user.role%><br>
+ <% end %> 
 
 <div>
-  <%= link_to "Edit this project", edit_project_path(@project) %> |
-  <%= link_to "Back to projects", projects_path %>
-
-  <%= button_to "Destroy this project", @project, method: :delete %>
+ <% if current_user.role == 'project_manager' || current_user.role == 'admin' %>
+   <%= link_to "Edit this project", edit_project_path(@project) %> |
+   <%= button_to "Destroy this project", @project, method: :delete %><br>
+ <% end %>
+ <%= link_to "Show Features", project_features_path(@project) %> <br><br>
+ <%= link_to "Show Bugs", project_bugs_path(@project) %><br><br>
+ <%= link_to "Back to projects", projects_path %><br><br>
 </div>

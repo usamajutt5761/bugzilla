@@ -12,9 +12,10 @@
 
 <p>
   <b>Project:</b>
-  <%= @project.name %>
+  <%= @project.title %>
 </p>
 
 
 <%= link_to 'Edit', edit_project_feature_path(@feature.project, @feature) %> |
 <%= link_to 'Back', project_features_path(@feature.project) %>
+<%= link_to "Back to project", project_path(@project.id) %>

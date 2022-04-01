@@ -2,19 +2,36 @@
 
 <h1>Projects</h1>
 
-<div id="projects">
-  <% @projects.each do |project| %>
-    <%= render project %>
-    <a href="<%= project_path(project) %>">
+current user is : <%= current_user.email %> <br>
+role : <%= current_user.role %> <br> <br>
 
-    <%
+<div id="projects">
+
+  <%
 =begin%>
- <p>
-      <%= link_to "Show this project", project %>
-    </p> 
+ <% @users.each do |user| %>
+   
+   user id: <%= user.id%><br>
+   user email :<%= user.email%><br>
+   user role:<%= user.role%><br>
+  <% end %> 
 <%
 =end%>
+    
+
+  <% @projects.each do |project| %>
+    
+    <%= render project %>
+    <p>
+      <% if current_user.role == 'admin' || current_user.role == 'project_manager'%>
+       current user is : <%= current_user.email %> <br>
+      <% end %>
+       <%= link_to "Show this project", project %>
+    </p> 
+
   <% end %>
 </div>
-
-<%= link_to "New project", new_project_path %>
+<% if (current_user.role == 'project_manager' || current_user.role == 'admin')%>
+ <%= link_to "New project", new_project_path %>
+<% end %>
+<%= link_to "back to user", "/" %>

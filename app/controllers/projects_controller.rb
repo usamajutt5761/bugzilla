@@ -8,14 +8,25 @@ class ProjectsController < InheritedResources::Base
 
 
   def index
-    @projects = Project.all
+    
+  #  @project = Projects.find_by id:current_user
+    if current_user.role == 'admin'
+      @projects = Project.all
+      # @users  = Project.users
+    else  
+    
+     @projects = current_user.projects
+    
+    #  @users  = @projects.users
+    end
   end
 
   def show 
+    @users = @project.users
   end
 
   def new
-   if current_user.role =='project_manager'
+   if current_user.role =='project_manager' || current_user.role == 'admin'
      @project = Project.new
      @users = User.all
      @added_users = false
@@ -37,7 +48,7 @@ class ProjectsController < InheritedResources::Base
     @users = User.all
   end
   def create
-    if user.role =='project_manager'
+    if current_user.role =='project_manager'
      @project = Project.new(project_params)
      puts("start")
 
@@ -56,6 +67,7 @@ class ProjectsController < InheritedResources::Base
        if @project.save
          saved_project = Project.find_by id: @project.id
          users = params[:users]
+         saved_project.users.push(current_user)
 
          users.each do |user|
            add_user = User.find_by id: user

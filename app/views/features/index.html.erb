@@ -14,7 +14,7 @@
   <tr>
     <td><%= feature.feature_name %></td>
     <td><%= feature.status %></td>
-    <td><%= @project.name %></td>
+    <td><%= @project.title %></td>
     <td><%= link_to 'Show', [feature.project, feature] %></td>
     <td><%= link_to 'Edit', edit_project_feature_path(feature.project, feature) %></td>
     
@@ -32,3 +32,4 @@
 <% if (current_user.role == 'project_manager' || current_user.role == 'admin' || current_user.role == 'qa') %>
   <%= link_to 'New Feature', new_project_feature_path(params[:project_id]) %>
 <% end %>
+<%= link_to "Back to project", project_path(@project.id) %>

@@ -2,4 +2,5 @@
 
 <%= render 'form', users:@users, status: @status %>
 <%= link_to 'Show', [@bug.project, @bug] %> |
-<%= link_to 'Back', project_bugs_path(@bug.project) %>
+<%= link_to 'Back', project_bugs_path(@bug.project) %><br>
+<%= link_to "Back to projects", projects_path %>
