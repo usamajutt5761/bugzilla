@@ -71,4 +71,5 @@ Rails.application.configure do
   # Store files locally.
   # config.active_storage.service = :local
 
+  config.sass.inline_source_maps = true
 end

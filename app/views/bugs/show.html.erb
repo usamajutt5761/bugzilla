@@ -21,6 +21,5 @@
 </p>
 
 
-<%= link_to 'Edit', edit_project_bug_path(@bug.project, @bug) %> <br>
-<%= link_to 'Back', project_bugs_path(@bug.project) %> <br>
-<%= link_to "Back to project", project_path(@project.id) %>
+<%= link_to 'Back', project_bugs_path(@bug.project) ,:class=>"btn btn-info"%> <br><br>
+<%= link_to "Back to project", project_path(@project.id),:class=>"btn btn-success" %>

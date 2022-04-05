@@ -14,6 +14,6 @@ class ProjectPolicy < ApplicationPolicy
   # end
 
   def new?
-    @user.role == "project_manager"
+    @user.role == "project_manager" || @user.role == 'admin'
   end
 end

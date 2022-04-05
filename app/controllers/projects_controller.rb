@@ -17,19 +17,25 @@ class ProjectsController < InheritedResources::Base
     
      @projects = current_user.projects
     
+    
     #  @users  = @projects.users
     end
   end
 
   def show 
     @users = @project.users
+    @features = @project.features
+    @bugs = @project.bugs
   end
 
   def new
    if current_user.role =='project_manager' || current_user.role == 'admin'
      @project = Project.new
      @users = User.all
+     @users = User.where.not(id:current_user.id)
      @added_users = false
+     authorize @project
+     
      if not user_signed_in?
        redirect_to user_session_path, :notice => 'login to continue'
      end
@@ -105,7 +111,7 @@ class ProjectsController < InheritedResources::Base
       end
       ids_array.each do |id_|
         if !(x.include?(id_))
-          y = UserProject.where(project_id: saved_project.id, user_id: id_)
+          y = UserToProject.where(project_id: saved_project.id, user_id: id_)
           y.delete_all
           # user_delete = saved_project.users.find_by id:id_
           # user_delete.delete

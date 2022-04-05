@@ -48,12 +48,12 @@
       <div>
         <%= form.label :users, style: "display: block" %>
         <% users.each do |user| %>
-          <%= check_box_tag "users[]", user.id %> <%= user.email %> </br>
+          <%= check_box_tag "users[]", user.id %> <%= user.email %> <br>
       <% end %>
     </div>
   <% end %>
 </div>
 <div>
-  <%= form.submit %>
+  <%= form.submit "update project",class:"btn btn-dark btn-lg" %>
 </div>
 <% end %>

@@ -1,37 +1,29 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Projects</h1>
 
-current user is : <%= current_user.email %> <br>
-role : <%= current_user.role %> <br> <br>
+
+
+
+
+<h1 style="text-align:center;">All Projects</h1>
 
 <div id="projects">
-
-  <%
-=begin%>
- <% @users.each do |user| %>
-   
-   user id: <%= user.id%><br>
-   user email :<%= user.email%><br>
-   user role:<%= user.role%><br>
-  <% end %> 
-<%
-=end%>
+    
+      <div class="row gx-4 gx-lg-5">
+       <% @projects.each do |project| %>
+        <div class="col-md-4 mb-5">
+         <div class="card h-100">
+           <div class="card-body">
+            
+             <h2 class="card-title"><%= render project %></h2>
+                           
+               <div class="card-footer"><%= link_to "Show this project", project, :class=>"btn btn-primary btn-sm" %></div>
+            
+           </div>
+         </div>
+        </div>
+       <%end%> 
+      </div>
+    
     
 
-  <% @projects.each do |project| %>
-    
-    <%= render project %>
-    <p>
-      <% if current_user.role == 'admin' || current_user.role == 'project_manager'%>
-       current user is : <%= current_user.email %> <br>
-      <% end %>
-       <%= link_to "Show this project", project %>
-    </p> 
-
-  <% end %>
-</div>
-<% if (current_user.role == 'project_manager' || current_user.role == 'admin')%>
- <%= link_to "New project", new_project_path %>
-<% end %>
-<%= link_to "back to user", "/" %>
