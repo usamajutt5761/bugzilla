@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
   resources :projects do
     resources :bugs
-  end
-  resources :projects do
     resources :features
   end
   

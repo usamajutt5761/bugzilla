@@ -1,8 +1,5 @@
-
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
- <%= render "devise/shared/error_messages", resource: resource %>
-
-
+  <%= render "devise/shared/error_messages", resource: resource %>
   <section class="vh-100" style="background-color: #9A616D;">  
     <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
@@ -17,7 +14,6 @@
                 <div class="card-body p-4 p-lg-5 text-black">
 
                   <form>
-
                     <div class="d-flex align-items-center mb-3 pb-1">
                       <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
                       <span class="h1 fw-bold mb-0">Bugzilla</span>
@@ -52,19 +48,14 @@
                       <label class="form-label" for="form2Example27"></label>
                     </div>
 
-                    <div class="pt-1 mb-4 action">
-                      
-                      <%= f.submit "Sign up",class:"btn btn-dark btn-lg btn-block" %>
-                      
+                    <div class="pt-1 mb-4 action">                      
+                      <%= f.submit "Sign up",class:"btn btn-dark btn-lg btn-block" %>                      
                     </div>
 
-                  
-
                     <p class="mb-5 pb-lg-2" style="color: #393f81;">Already have an account? <a href="<%= new_user_session_path %>"
-                        style="color: #393f81;">Sign in here</a></p>
+                    style="color: #393f81;">Sign in here</a></p>
                   
                   </form>
-
                 </div>
               </div>
             </div>
@@ -75,10 +66,5 @@
   </section>
 <% end %>
 
-
-
-
-
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-
 <% end %>

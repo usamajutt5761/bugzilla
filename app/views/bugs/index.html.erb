@@ -1,32 +1,28 @@
 <h1>Listing bugs</h1>
 
 <table id="example" class="table table-striped table-bordered" style="width:100%">
- <thead>
-  <tr>
-    <th>Bug name</th>
-    <th>Detail</th>
-    <th>Status</th>
-    <th>Project</th>
-  
-  </tr>
- </thead>
- <tbody>
-  <% @bugs.each do |bug| %>
-   <tr>
-    <td><%= bug.bug_name %></td>
-    <td><%= bug.detail %></td>
-    <td><%= bug.status %></td>
-    <td><%= @project.title %></td>
-    <td><%= link_to 'Show', [bug.project, bug], :class=>"btn btn-success"%></td>
-    <td><%= link_to 'Edit', edit_project_bug_path(bug.project, bug) , :class=>"btn btn-warning"%></td>
-    <td><%= button_to "Destroy this Bug", [bug.project, bug], method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-danger" %></td>
-   
-   
-   </tr>
-  <% end %>
- </tbody>
+  <thead>
+    <tr>
+      <th>Bug name</th>
+      <th>Detail</th>
+      <th>Status</th>
+      <th>Project</th>  
+    </tr>
+  </thead>
+  <tbody>
+    <% @bugs.each do |bug| %>
+      <tr>
+        <td><%= bug.bug_name %></td>
+        <td><%= bug.detail %></td>
+        <td><%= bug.status %></td>
+        <td><%= @project.title %></td>
+        <td><%= link_to 'Show', [bug.project, bug], :class=>"btn btn-success"%></td>
+        <td><%= link_to 'Edit', edit_project_bug_path(bug.project, bug) , :class=>"btn btn-warning"%></td>
+        <td><%= button_to "Destroy this Bug", [bug.project, bug], method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-danger" %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
-
 <br />
 
 <% if (current_user.role == 'qa' || current_user.role == 'admin' || current_user.role == 'project_manager') %>

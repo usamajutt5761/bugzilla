@@ -6,8 +6,6 @@ class User < ApplicationRecord
   enum role: [:project_manager, :developer, :qa, :admin]
 
   validates :role, presence: :true
-  
-  
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -18,7 +16,7 @@ class User < ApplicationRecord
   # #   attachable.variant :thumb, resize_to_limit: [100, 100]
   # # end
   
-  # #  :add_default_avatar  on: %i[create update]
+  #  :add_default_avatar  on: %i[create update]
 
   # def avatar_thumbnail
   #   if avatar.attached?
@@ -27,7 +25,6 @@ class User < ApplicationRecord
   #     after_commit "/default_profile.jpg"
   #   end
   # end  
-
 
   private
 

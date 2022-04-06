@@ -1,13 +1,11 @@
 <h1>New project</h1>
-  <% if current_user%>
-    
-    <%= render "form", project: @project, users:@users, added_users:@added_users %>
-  <% end %><br><br>
-    
+<% if current_user%>
+  <%= render "form", project: @project, users:@users, added_users:@added_users %>
+<% end %><br><br>    
 
- <div>
+<div>
   <% if current_user%>
     <%= link_to "Back to projects", projects_path %>
     <%= link_to "Back to home", "/" %>
   <% end %>
- </div>
+</div>

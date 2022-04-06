@@ -7,9 +7,6 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   # def show?
-  #   puts("policyy")
-  #   puts(@user.email)
-  #   # puts(@project2.project_manager_id)
   #   # @user.id == @project.project_manager_id
   # end
 
