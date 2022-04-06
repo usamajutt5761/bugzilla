@@ -4,7 +4,7 @@ class ProjectsController < InheritedResources::Base
 
   def index
     if current_user.role == 'admin'
-      @projects = Project.all
+      @projects = policy_scope(Project)
     else
       @projects = current_user.projects
     end
@@ -17,19 +17,11 @@ class ProjectsController < InheritedResources::Base
   end
 
   def new
-    if current_user.role =='project_manager' || current_user.role == 'admin'
-      @project = Project.new
-      @users = User.all
-      @users = User.where.not(id:current_user.id)
-      @added_users = false
-      authorize @project
-     
-      if not user_signed_in?
-        redirect_to user_session_path, :notice => 'login to continue'
-      end
-    else
-      redirect_to user_session_path, notice: 'You are not autthorized to create the Project'
-    end 
+    @project = Project.new
+    @users = User.all
+    @users = User.where.not(id:current_user.id)
+    @added_users = false
+    authorize @project
   end  
 
   def edit

@@ -4,7 +4,7 @@ class FeaturesController < ApplicationController
 
   # GET projects/1/features
   def index
-    @features = @project.features
+    @features = policy_scope(Project.Features)
   end
 
   # GET projects/1/features/1

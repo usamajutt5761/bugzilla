@@ -5,9 +5,9 @@ class BugsController < ApplicationController
   # GET projects/1/bugs
   def index
     if current_user.role == "project_manager" || current_user.role == "admin" || current_user.role == "qa"
-      @bugs = @project.bugs
+      @bugs = policy_scope(Project.Bugs)
     else
-      @bugs = @project.bugs.where(user_id: current_user.id)
+      @bugs = Project.bugs.with_current_user
     end
   end
 

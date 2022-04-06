@@ -3,9 +3,3 @@
   <%= render "form", project: @project, users:@users, added_users:@added_users %>
 <% end %><br><br>    
 
-<div>
-  <% if current_user%>
-    <%= link_to "Back to projects", projects_path %>
-    <%= link_to "Back to home", "/" %>
-  <% end %>
-</div>
