@@ -5,9 +5,9 @@ class BugsController < ApplicationController
   # GET projects/1/bugs
   def index
     if current_user.role == "project_manager" || current_user.role == "admin" || current_user.role == "qa"
-      @bugs = policy_scope(Project.Bugs)
+      @bugs = @project.bugs
     else
-      @bugs = Project.bugs.with_current_user
+      @bugs = policy_scope(Bug.all)
     end
   end
 
@@ -32,9 +32,13 @@ class BugsController < ApplicationController
         @status.push("created")
       elsif(@bug.status == "in_review")
         @status.push("fixed")
+      elsif(@bug.status == "created")
       end
     elsif current_user.role == "developer"
-      if(@bug.status == "in_review" || @bug.status == "fixed")
+      if(@bug.status == "in_progress")
+        @status.push("in_review")
+      end
+      if(@bug.status == "in_review")
       else
         @status.push("in_review")
       end

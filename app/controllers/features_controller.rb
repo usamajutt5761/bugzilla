@@ -4,7 +4,7 @@ class FeaturesController < ApplicationController
 
   # GET projects/1/features
   def index
-    @features = policy_scope(Project.Features)
+    @features = policy_scope(Feature)
   end
 
   # GET projects/1/features/1
@@ -25,11 +25,14 @@ class FeaturesController < ApplicationController
     if current_user.role == "qa"
       if(@feature.status == "complete")
         @status.push("created")
-      elsif(@feature.status == "in_progress")
+      elsif(@feature.status == "in_review")
         @status.push("complete")
       end
     elsif current_user.role == "developer"
-      if(@feature.status == "in_progress" || @feature.status == "complete")
+      if(@feature.status == "in_progress")
+        @status.push("in_review")
+      end
+      if(@feature.status == "in_review")
       else
         @status.push("in_progress")
       end
