@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ArticlePolicy < ApplicationPolicy
   class Scope < Scope
     # NOTE: Be explicit about which records you allow access to!
@@ -7,7 +9,6 @@ class ArticlePolicy < ApplicationPolicy
   end
 
   def index?
-    @user.role == "project_manager"
+    @user.role == 'project_manager'
   end
-
 end

@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class FeaturesController < ApplicationController
   before_action :set_project
-  before_action :set_feature, only: [:show, :edit, :update, :destroy]
+  before_action :set_feature, only: %i[show edit update destroy]
 
   # GET projects/1/features
   def index
@@ -8,13 +10,12 @@ class FeaturesController < ApplicationController
   end
 
   # GET projects/1/features/1
-  def show
-  end
+  def show; end
 
   # GET projects/1/features/new
   def new
     @status = []
-    @status.push("created")
+    @status.push('created')
     @feature = @project.features.build
     authorize @feature
   end
@@ -22,19 +23,19 @@ class FeaturesController < ApplicationController
   def edit
     @status = []
     @status.push(@feature.status)
-    if current_user.role == "qa"
-      if(@feature.status == "complete")
-        @status.push("created")
-      elsif(@feature.status == "in_review")
-        @status.push("complete")
+    case current_user.role
+    when 'qa'
+      case @feature.status
+      when 'complete'
+        @status.push('created')
+      when 'in_review'
+        @status.push('complete')
       end
-    elsif current_user.role == "developer"
-      if(@feature.status == "in_progress")
-        @status.push("in_review")
-      end
-      if(@feature.status == "in_review")
+    when 'developer'
+      @status.push('in_review') if @feature.status == 'in_progress'
+      if @feature.status == 'in_review'
       else
-        @status.push("in_progress")
+        @status.push('in_progress')
       end
     end
   end
@@ -65,6 +66,7 @@ class FeaturesController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_project
       @project = Project.find(params[:project_id])

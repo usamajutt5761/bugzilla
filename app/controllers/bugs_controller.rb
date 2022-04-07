@@ -1,25 +1,26 @@
+# frozen_string_literal: true
+
 class BugsController < ApplicationController
   before_action :set_project
-  before_action :set_bug, only: [:show, :edit, :update, :destroy]
+  before_action :set_bug, only: %i[show edit update destroy]
 
   # GET projects/1/bugs
   def index
-    if current_user.role == "project_manager" || current_user.role == "admin" || current_user.role == "qa"
-      @bugs = @project.bugs
-    else
-      @bugs = policy_scope(Bug.all)
-    end
+    @bugs = if current_user.role == 'project_manager' || current_user.role == 'admin' || current_user.role == 'qa'
+              @project.bugs
+            else
+              policy_scope(Bug.all)
+            end
   end
 
   # GET projects/1/bugs/1
-  def show
-  end
+  def show; end
 
   # GET projects/1/bugs/new
   def new
     @status = []
-    @status.push("created")
-    @users = @project.users.where(role: "developer")
+    @status.push('created')
+    @users = @project.users.where(role: 'developer')
     @bug = @project.bugs.build
   end
 
@@ -27,23 +28,23 @@ class BugsController < ApplicationController
   def edit
     @status = []
     @status.push(@bug.status)
-    if current_user.role == "qa"
-      if(@bug.status == "fixed")
-        @status.push("created")
-      elsif(@bug.status == "in_review")
-        @status.push("fixed")
-      elsif(@bug.status == "created")
+    case current_user.role
+    when 'qa'
+      case @bug.status
+      when 'fixed'
+        @status.push('created')
+      when 'in_review'
+        @status.push('fixed')
+      when 'created'
       end
-    elsif current_user.role == "developer"
-      if(@bug.status == "in_progress")
-        @status.push("in_review")
-      end
-      if(@bug.status == "in_review")
+    when 'developer'
+      @status.push('in_review') if @bug.status == 'in_progress'
+      if @bug.status == 'in_review'
       else
-        @status.push("in_review")
+        @status.push('in_review')
       end
     end
-    @users = @project.users.where(role: "developer")
+    @users = @project.users.where(role: 'developer')
   end
 
   # POST projects/1/bugs
@@ -72,6 +73,7 @@ class BugsController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_project
       @project = Project.find(params[:project_id])

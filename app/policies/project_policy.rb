@@ -1,10 +1,10 @@
+# frozen_string_literal: true
+
 class ProjectPolicy < ApplicationPolicy
   class Scope < Scope
     # NOTE: Be explicit about which records you allow access to!
     def resolve
-      if user.admin?
-        scope.all
-      end
+      scope.all if user.admin?
     end
   end
 
@@ -16,6 +16,6 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def new?
-    @user.role == "project_manager" || @user.role == 'admin'
+    @user.role == 'project_manager' || @user.role == 'admin'
   end
 end

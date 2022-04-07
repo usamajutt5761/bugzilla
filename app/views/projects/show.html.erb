@@ -62,7 +62,9 @@
         <td><%= @project.title %></td>
         <td><%= link_to 'Show', [bug.project, bug], :class=>"btn btn-success"%></td>
         <td><%= link_to 'Edit', edit_project_bug_path(bug.project, bug) , :class=>"btn btn-warning"%></td>
-        <td><%= button_to "Destroy this Bug", [bug.project, bug], method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-danger" %></td>
+        <% if current_user.role == 'project_manager' %>
+          <td><%= button_to "Destroy this Bug", [bug.project, bug], method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-danger" %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
