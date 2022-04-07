@@ -82,3 +82,4 @@ gem 'jquery-rails'
 gem 'requestjs-rails'
 gem 'importmap-rails'
 gem 'file_validators'
+gem 'rubocop', '~> 1.26', require: false

@@ -11,30 +11,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  # has_one_attached :avatar 
-  # # do |attachable|
-  # #   attachable.variant :thumb, resize_to_limit: [100, 100]
-  # # end
+  has_one_attached :avatar
   
-  #  :add_default_avatar  on: %i[create update]
-
-  # def avatar_thumbnail
-  #   if avatar.attached?
-  #       avatar.variant(resize: "100x100!")
-  #   else 
-  #     after_commit "/default_profile.jpg"
-  #   end
-  # end  
-
-  private
-
-  # def add_default_avatar
-  #   unlesss avatar.attached?
-  #    avatar.attach(
-  #      io: File.open(
-  #        Rails.root.join('app', 'assets', 'images', 'default_profile.jpg')
-  #       )
-  #       , filename: 'deault_profile.jpg', content_type: 'image/jpg')
-  #   end
-  # end 
+  ## Validations
+  validates :avatar, file_size: { less_than_or_equal_to: 5.megabytes },
+  file_content_type: { allow: ['image/jpeg', 'image/png', 'image/gif'] }
+  
 end
